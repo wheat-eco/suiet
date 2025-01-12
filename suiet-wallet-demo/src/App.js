@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { ConnectButton, useWallet } from "@suiet/wallet-kit";
 
 function App() {
+  const wallet = useWallet();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Suiet Wallet Demo</h1>
+      <ConnectButton />
+      {wallet.connected && (
+        <div>
+          <h2>Wallet Connected</h2>
+          <p>Address: {wallet.account?.address}</p>
+          <p>Network: {wallet.chain?.name}</p>
+        </div>
+      )}
     </div>
   );
 }
 
 export default App;
+
